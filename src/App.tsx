@@ -1,7 +1,10 @@
+import './assets/styles.scss';
+import { Outlet } from 'react-router-dom';
+
 export default function App(): JSX.Element {
   return (
-    <div>
-      <h1>App</h1>
+    <div className="app_container">
+      <Outlet />
     </div>
   );
 }
