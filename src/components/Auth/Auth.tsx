@@ -3,6 +3,7 @@ import './assets/styles.scss';
 export default function Auth(): JSX.Element {
   return (
     <div className="auth">
+      <h1>Sign Up</h1>
       <form className="auth_form">
         <div className="auth_form_input">
           <label htmlFor="username">Username</label>
