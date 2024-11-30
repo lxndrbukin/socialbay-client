@@ -1,0 +1,61 @@
+@import '../../../assets/variables.scss';
+
+.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: $color-dark-grey;
+  width: 70%;
+  align-self: center;
+
+  .auth_form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    border-radius: $border-r10;
+    width: 100%;
+    max-width: 450px;
+
+    .auth_form_input {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      label {
+        color: $color-white;
+        font-size: 0.9rem;
+        font-weight: bold;
+      }
+
+      input {
+        padding: $spacing-lg $spacing-lg;
+        border-radius: $border-r7;
+        border: none;
+        background-color: $color-dark-grey-2;
+        color: $color-white;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 1rem;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    button {
+      padding: $spacing-lg $spacing-lg;
+      border-radius: $border-r7;
+      border: none;
+      background-color: $color-ocean-blue;
+      color: $color-white;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+}
