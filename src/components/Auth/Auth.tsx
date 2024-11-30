@@ -1,39 +1,32 @@
 import './assets/styles.scss';
+import { useLocation } from 'react-router-dom';
+import { AuthFormInputProps } from './types';
+import { inputFields } from './assets/formData';
+import AuthForm from './AuthForm';
+import AuthFormInput from './assets/reusable/AuthFormInput';
 
 export default function Auth(): JSX.Element {
+  const { pathname } = useLocation();
+
+  const renderedInputFields = inputFields.map((field: AuthFormInputProps) => {
+    if (field.displayRoute && field.displayRoute !== pathname) {
+      return;
+    }
+    return (
+      <AuthFormInput key={field.name} label={field.placeholder} {...field} />
+    );
+  });
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    console.log('Submitted');
+  };
+
+  const buttonText = pathname === '/signup' ? 'Sign Up' : 'Login';
+
   return (
-    <div className="auth">
-      <h1>Sign Up</h1>
-      <form className="auth_form">
-        <div className="auth_form_input">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Enter your username"
-          />
-        </div>
-        <div className="auth_form_input">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your email"
-          />
-        </div>
-        <div className="auth_form_input">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Enter your password"
-          />
-        </div>
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
+    <AuthForm onSubmit={onSubmit} buttonText={buttonText}>
+      {renderedInputFields}
+    </AuthForm>
   );
 }
