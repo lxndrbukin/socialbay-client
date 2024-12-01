@@ -1,13 +1,20 @@
 import './assets/styles.scss';
-import { useState } from 'react';
+import { useState, FormEvent, ChangeEvent, FocusEvent } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, handleAuthErrors, RootState } from '../../store';
 import { useLocation } from 'react-router-dom';
 import { AuthFormInputProps } from './types';
 import { inputFields } from './assets/formData';
 import AuthForm from './AuthForm';
 import AuthFormInput from './assets/reusable/AuthFormInput';
+import { SessionProps } from '../../store/slices/types';
 
 export default function Auth(): JSX.Element {
   const { pathname } = useLocation();
+  const dispatch = useDispatch<AppDispatch>();
+  const { errors } = useSelector(
+    (state: RootState): SessionProps => state.session
+  );
   const [formData, setFormData] = useState<{
     [key: string]: undefined | string;
   }>({
@@ -16,10 +23,8 @@ export default function Auth(): JSX.Element {
     password: undefined,
   });
 
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    const { name, value } = event.target;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
@@ -27,8 +32,16 @@ export default function Auth(): JSX.Element {
     console.log(formData);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
+  const handleInputSelect = (e: FocusEvent<HTMLInputElement>): void => {
+    dispatch(handleAuthErrors({ [e.target.name]: undefined }));
+  };
+
+  const handleInputUnselect = (e: FocusEvent<HTMLInputElement>): void => {
+    dispatch(handleAuthErrors({ [e.target.name]: 'Required' }));
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
     console.log('Submitted');
   };
 
@@ -41,6 +54,9 @@ export default function Auth(): JSX.Element {
         key={field.name}
         label={field.placeholder}
         onChange={handleInputChange}
+        onSelect={handleInputSelect}
+        onBlur={handleInputUnselect}
+        errormsg={errors?.[field.name]}
         {...field}
       />
     );
