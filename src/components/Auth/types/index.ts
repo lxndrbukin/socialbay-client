@@ -13,7 +13,7 @@ export type AuthFormInputProps = {
 export type AuthFormProps = {
   children: ReactNode;
   onSubmit: FormEventHandler<HTMLFormElement>;
-  buttonText: string;
+  action: string;
   redirectText?: string;
   redirectURLText?: string;
   redirectURL?: string;

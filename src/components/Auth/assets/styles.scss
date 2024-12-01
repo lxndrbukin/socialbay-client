@@ -1,4 +1,4 @@
-@import '../../../assets/variables.scss';
+@use '../../../assets/variables.scss' as *;
 
 .auth {
   display: flex;
@@ -10,102 +10,132 @@
   width: 70%;
   align-self: center;
 
-  .auth_form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    border-radius: $border-r10;
+  .auth_form_container {
     width: 100%;
     max-width: 450px;
 
-    .auth_form_input {
+    .auth_separator {
+      position: relative;
       display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      margin: $spacing-lg 0;
 
-      label {
-        color: $color-white;
-        font-size: 0.9rem;
+      .auth_separator_text {
+        position: relative;
+        z-index: 1;
+        background-color: $color-dark-grey;
+        border-radius: 50%;
+        padding: $spacing-md;
         font-weight: bold;
       }
 
-      input {
+      .auth_separator_line {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 100%;
+        height: 1px;
+        background-color: $color-white;
+      }
+    }
+
+    .auth_form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      border-radius: $border-r10;
+      width: 100%;
+
+      .auth_form_input {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        label {
+          color: $color-white;
+          font-size: 0.9rem;
+          font-weight: bold;
+        }
+
+        input {
+          padding: $spacing-lg $spacing-lg;
+          border-radius: $border-r7;
+          border: none;
+          background-color: $color-dark-grey-2;
+          color: $color-white;
+          width: 100%;
+          box-sizing: border-box;
+          font-size: 1rem;
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+
+      button {
         padding: $spacing-lg $spacing-lg;
         border-radius: $border-r7;
         border: none;
-        background-color: $color-dark-grey-2;
+        background-color: $color-ocean-blue;
         color: $color-white;
         width: 100%;
         box-sizing: border-box;
         font-size: 1rem;
-
-        &:focus {
-          outline: none;
-        }
-      }
-    }
-
-    button {
-      padding: $spacing-lg $spacing-lg;
-      border-radius: $border-r7;
-      border: none;
-      background-color: $color-ocean-blue;
-      color: $color-white;
-      width: 100%;
-      box-sizing: border-box;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-    }
-  }
-
-  .auth_third_party {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-    width: 100%;
-    max-width: 450px;
-
-    .link {
-      display: grid;
-      grid-template-columns: min-content 1fr;
-      align-items: center;
-      gap: 0.5rem;
-      text-decoration: none;
-      padding: $spacing-md $spacing-lg;
-      border-radius: $border-r7;
-      cursor: pointer;
-      position: relative;
-      box-sizing: border-box;
-      height: 50px;
-      width: 100%;
-
-      img {
-        height: 2rem;
-      }
-
-      span {
-        font-size: 1rem;
         font-weight: bold;
-        height: fit-content;
-        text-align: center;
-        margin-left: -32px;
+        cursor: pointer;
       }
+    }
 
-      &.google {
-        background-color: $color-white;
-        color: $color-black;
-      }
+    .auth_third_party {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      width: 100%;
 
-      &.facebook {
-        background-color: #4a76a8;
-        color: $color-white;
-      }
+      .link {
+        display: grid;
+        grid-template-columns: min-content 1fr;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        padding: $spacing-md $spacing-lg;
+        border-radius: $border-r7;
+        cursor: pointer;
+        position: relative;
+        box-sizing: border-box;
+        height: 50px;
+        width: 100%;
 
-      &.vk {
-        background-color: #1877f2;
-        color: $color-white;
+        img {
+          height: 2rem;
+        }
+
+        span {
+          font-size: 1rem;
+          font-weight: bold;
+          height: fit-content;
+          text-align: center;
+          margin-left: -32px;
+        }
+
+        &.google {
+          background-color: $color-white;
+          color: $color-black;
+        }
+
+        &.facebook {
+          background-color: #4a76a8;
+          color: $color-white;
+        }
+
+        &.vk {
+          background-color: #1877f2;
+          color: $color-white;
+        }
       }
     }
   }
