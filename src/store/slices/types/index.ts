@@ -10,7 +10,12 @@ export type UserData = {
 };
 
 export type SessionError = {
-  [key: string]: string | undefined;
+  [key: string]:
+    | {
+        value: string;
+        message: string;
+      }
+    | undefined;
 };
 
 export type SessionProps = {

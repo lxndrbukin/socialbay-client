@@ -1,5 +1,5 @@
 import './assets/styles.scss';
-import { useState, FormEvent, ChangeEvent, FocusEvent } from 'react';
+import { useState, FormEvent, FocusEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, handleAuthErrors, RootState } from '../../store';
 import { useLocation } from 'react-router-dom';
@@ -29,34 +29,46 @@ export default function Auth(): JSX.Element {
       ...formData,
       [name]: value,
     });
-    console.log(formData);
   };
 
   const handleInputSelect = (e: FocusEvent<HTMLInputElement>): void => {
-    dispatch(handleAuthErrors({ [e.target.name]: undefined }));
+    const { name } = e.target;
+    dispatch(handleAuthErrors({ [name]: undefined }));
   };
 
   const handleInputUnselect = (e: FocusEvent<HTMLInputElement>): void => {
-    dispatch(handleAuthErrors({ [e.target.name]: 'Required' }));
+    const { value, name } = e.target;
+    if (!value.length) {
+      dispatch(handleAuthErrors({ [name]: { value, message: 'Required' } }));
+    }
+    if (value.length) {
+      if (value.length < 3) {
+        dispatch(
+          handleAuthErrors({
+            [name]: { value, message: 'Must be at least 3 characters long' },
+          })
+        );
+      }
+    }
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log('Submitted');
   };
 
   const renderedInputFields = inputFields.map((field: AuthFormInputProps) => {
-    if (field.displayRoute && field.displayRoute !== pathname) {
+    if (field.displayroute && field.displayroute !== pathname) {
       return;
     }
     return (
       <AuthFormInput
         key={field.name}
+        filled={formData[field.name] && (formData[field.name] as string).length}
         label={field.placeholder}
         onChange={handleInputChange}
         onSelect={handleInputSelect}
         onBlur={handleInputUnselect}
-        errormsg={errors?.[field.name]}
+        errormsg={errors?.[field.name]?.message}
         {...field}
       />
     );

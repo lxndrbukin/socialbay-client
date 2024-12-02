@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SessionProps } from './types';
+import { SessionProps, SessionError } from './types';
 
 const initialState: SessionProps = {
   isLoggedIn: false,
@@ -13,7 +13,7 @@ export const sessionSlice = createSlice({
   reducers: {
     handleAuthErrors: (
       state: SessionProps,
-      action: PayloadAction<{ [key: string]: string | undefined }>
+      action: PayloadAction<SessionError>
     ) => {
       state.errors = { ...state.errors, ...action.payload };
     },

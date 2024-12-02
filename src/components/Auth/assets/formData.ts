@@ -5,7 +5,7 @@ export const inputFields: Array<AuthInputField> = [
   {
     name: 'email',
     placeholder: 'Email',
-    displayRoute: '/signup',
+    displayroute: '/signup',
   },
   { name: 'password', placeholder: 'Password' },
 ];

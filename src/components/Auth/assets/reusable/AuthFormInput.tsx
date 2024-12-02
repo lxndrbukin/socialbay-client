@@ -5,6 +5,7 @@ export default function AuthFormInput({
   placeholder,
   label,
   errormsg,
+  filled,
   ...props
 }: AuthFormInputProps): JSX.Element {
   return (
@@ -12,8 +13,7 @@ export default function AuthFormInput({
       <input
         {...props}
         name={name}
-        // placeholder={placeholder}
-        className={`input ${errormsg ? 'error' : ''}`}
+        className={`input ${filled ? 'filled' : ''}`}
       />
       <label className={`input_label ${errormsg ? 'error' : ''}`}>
         {label}
