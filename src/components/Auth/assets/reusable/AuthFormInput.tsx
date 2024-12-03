@@ -1,6 +1,7 @@
 import { AuthFormInputProps } from '../../types';
 
 export default function AuthFormInput({
+  children,
   name,
   placeholder,
   label,
@@ -18,7 +19,7 @@ export default function AuthFormInput({
       <label className={`input_label ${errormsg ? 'error' : ''}`}>
         {label}
       </label>
-      <span className="auth_error">{errormsg}</span>
+      {children}
     </div>
   );
 }

@@ -1,8 +1,9 @@
 import './assets/styles.scss';
 import { useState, FormEvent, FocusEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, handleAuthErrors, RootState } from '../../store';
+import { AppDispatch, handleAuthErrors, RootState, auth } from '../../store';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 import { AuthFormInputProps } from './types';
 import { inputFields } from './assets/formData';
 import AuthForm from './AuthForm';
@@ -16,11 +17,11 @@ export default function Auth(): JSX.Element {
     (state: RootState): SessionProps => state.session
   );
   const [formData, setFormData] = useState<{
-    [key: string]: undefined | string;
+    [key: string]: string;
   }>({
-    username: undefined,
-    email: undefined,
-    password: undefined,
+    username: '',
+    email: '',
+    password: '',
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -52,8 +53,13 @@ export default function Auth(): JSX.Element {
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
+    try {
+      dispatch(auth({ action: pathname, data: formData }));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const renderedInputFields = inputFields.map((field: AuthFormInputProps) => {
@@ -70,7 +76,9 @@ export default function Auth(): JSX.Element {
         onBlur={handleInputUnselect}
         errormsg={errors?.[field.name]?.message}
         {...field}
-      />
+      >
+        <span className="auth_error">{errors?.[field.name]?.message}</span>
+      </AuthFormInput>
     );
   });
 
