@@ -19,6 +19,31 @@
       font-size: 1.5rem;
     }
 
+    .header_search {
+      height: 75%;
+      display: flex;
+      align-items: center;
+      background-color: $color-dark-grey-2;
+      border-radius: $border-r5;
+
+      input {
+        height: 100%;
+        box-sizing: border-box;
+        background-color: transparent;
+        border: none;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      button {
+        height: 100%;
+        background-color: transparent;
+        border: none;
+      }
+    }
+
     .header_user {
       .header_user_menu {
         display: flex;
@@ -26,6 +51,8 @@
         position: relative;
 
         .header_user_menu-icon {
+          cursor: pointer;
+
           .icon-placeholder {
             width: 35px;
             height: 35px;
@@ -38,17 +65,23 @@
           position: absolute;
           background-color: $color-dark-grey;
           width: 250px;
-          padding: 10px;
+          padding: 15px;
           box-sizing: border-box;
           top: 45px;
+          right: 0;
           border-radius: $border-r5;
+          border: 1px solid $color-dark-grey-2;
 
           .header_user_menu-dropdown_info {
             padding: 10px;
             background-color: $color-dark-grey-2;
+            border-radius: $border-r5;
           }
 
           .header_user_menu-dropdown_links {
+            list-style-type: none;
+            padding: 0;
+
             a {
               color: $color-white;
               text-decoration: none;
