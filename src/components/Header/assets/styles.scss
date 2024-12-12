@@ -30,12 +30,30 @@
             width: 35px;
             height: 35px;
             background-color: $color-grey;
+            border-radius: 50%;
           }
         }
 
         .header_user_menu-dropdown {
           position: absolute;
-          background-color: $color-dark-grey-2;
+          background-color: $color-dark-grey;
+          width: 250px;
+          padding: 10px;
+          box-sizing: border-box;
+          top: 45px;
+          border-radius: $border-r5;
+
+          .header_user_menu-dropdown_info {
+            padding: 10px;
+            background-color: $color-dark-grey-2;
+          }
+
+          .header_user_menu-dropdown_links {
+            a {
+              color: $color-white;
+              text-decoration: none;
+            }
+          }
         }
       }
     }
