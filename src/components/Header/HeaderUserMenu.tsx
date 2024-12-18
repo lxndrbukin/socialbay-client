@@ -13,6 +13,7 @@ const links: UserMenuLink[] = [
 
 export default function HeaderUserMenu(): JSX.Element {
   const [active, setActive] = useState<boolean>(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,18 +27,26 @@ export default function HeaderUserMenu(): JSX.Element {
     setActive(true);
   };
 
-  const handleOutsideClick = (e: MouseEvent) => {
-    if (dropdownRef.current && dropdownRef.current.contains(e.target as Node)) {
+  const handleOutsideClick = (e: MouseEvent): void => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(e.target as Node) &&
+      userMenuRef.current &&
+      !userMenuRef.current.contains(e.target as Node)
+    ) {
       setActive(false);
-      console.log(active);
     }
   };
 
-  const renderedLinks = links.map(({ url, text }: UserMenuLink) => (
-    <li key={text}>
-      <a href={url}>{text}</a>
-    </li>
-  ));
+  const renderedLinks = links.map(
+    ({ url, text }: UserMenuLink): JSX.Element => {
+      return (
+        <li key={text}>
+          <a href={url}>{text}</a>
+        </li>
+      );
+    }
+  );
 
   const renderedDropdown = active && (
     <div ref={dropdownRef} className='header_user_menu-dropdown'>
@@ -51,7 +60,7 @@ export default function HeaderUserMenu(): JSX.Element {
 
   return (
     <div className='header_user'>
-      <div className='header_user_menu'>
+      <div ref={userMenuRef} className='header_user_menu'>
         <div onClick={handleInsideClick} className='header_user_menu-icon'>
           <div className='icon-placeholder'></div>
         </div>
