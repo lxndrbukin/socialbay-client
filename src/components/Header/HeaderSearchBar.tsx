@@ -1,6 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch, setSearchValue, search } from '../../store';
 
 export default function HeaderSearchBar(): JSX.Element {
+  const dispatch = useDispatch<AppDispatch>();
   const [inputValue, setInputValue] = useState<string>('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -9,7 +12,8 @@ export default function HeaderSearchBar(): JSX.Element {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log(inputValue);
+    dispatch(setSearchValue(inputValue));
+    dispatch(search(inputValue));
   };
 
   return (

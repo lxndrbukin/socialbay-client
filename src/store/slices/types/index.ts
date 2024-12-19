@@ -23,3 +23,8 @@ export type SessionProps = {
   data: UserData | undefined;
   errors: SessionError | undefined;
 };
+
+export type SearchProps = {
+  searchValue: string;
+  results: [];
+};
