@@ -1,9 +1,9 @@
 import { ReactNode, FormEventHandler } from 'react';
 
 export type AuthInputField = {
-  children: ReactNode;
   name: string;
   placeholder: string;
+  type?: string;
   displayroute?: string;
 };
 
