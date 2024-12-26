@@ -1,14 +1,14 @@
-import "./assets/styles.scss";
-import { useState, FormEvent, FocusEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, handleAuthErrors, RootState, auth } from "../../store";
-import { useLocation } from "react-router-dom";
-import { AuthFormInputProps } from "./types";
-import { inputFields } from "./assets/formData";
-import { returnErrorMessage } from "./helpers";
-import AuthForm from "./AuthForm";
-import AuthFormInput from "./assets/reusable/AuthFormInput";
-import { SessionProps } from "../../store/slices/types";
+import './assets/styles.scss';
+import { useState, FormEvent, FocusEvent } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, handleAuthErrors, RootState, auth } from '../../store';
+import { useLocation } from 'react-router-dom';
+import { AuthFormInputProps } from './types';
+import { inputFields } from './assets/formData';
+import { returnErrorMessage } from './helpers';
+import AuthForm from './AuthForm';
+import AuthFormInput from './assets/reusable/AuthFormInput';
+import { SessionProps } from '../../store/slices/types';
 
 export default function Auth(): JSX.Element {
   const { pathname } = useLocation();
@@ -19,9 +19,9 @@ export default function Auth(): JSX.Element {
   const [formData, setFormData] = useState<{
     [key: string]: string;
   }>({
-    username: "",
-    email: "",
-    password: "",
+    username: '',
+    email: '',
+    password: '',
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -66,12 +66,12 @@ export default function Auth(): JSX.Element {
         errormsg={errors?.[field.name]?.message}
         {...field}
       >
-        <span className="auth_error">{errors?.[field.name]?.message}</span>
+        <span className='auth_error'>{errors?.[field.name]?.message}</span>
       </AuthFormInput>
     );
   });
 
-  const userAction = pathname === "/signup" ? "Sign Up" : "Login";
+  const userAction = pathname === '/signup' ? 'Sign Up' : 'Login';
 
   return (
     <AuthForm onSubmit={handleSubmit} action={userAction}>

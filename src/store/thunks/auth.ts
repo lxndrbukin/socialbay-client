@@ -10,7 +10,7 @@ export const auth = createAsyncThunk(
   'session/auth',
   async ({ action, data }: AuthData, { rejectWithValue }): Promise<any> => {
     try {
-      const res = await axios.post(`http://localhost:3000/auth`, {
+      const res = await axios.post(`/auth`, {
         action,
         data,
       });
